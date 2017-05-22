@@ -1,0 +1,16 @@
+<apex:page standardController="account" sidebar="false" showheader="false">
+    <div>
+        <img  style="width:100px;height:100px" src="https://www.gauri.com/brand/Gauri_Logo_Blue.png"/>
+    </div>
+    <apex:form >
+    <apex:pageblock title="Account Block">
+        <apex:pageblocksection title="Account Details">
+            <apex:inputField value="{!account.name}"/>
+            <apex:inputField value="{!account.type}"/>
+            <apex:inputfield value="{!account.Grantee_Status__c}"/>
+            <apex:commandButton action="{!save}" value="Save"/>
+        </apex:pageblocksection>
+    </apex:pageblock>
+    </apex:form>
+    <apex:pagemessages ></apex:pagemessages>
+</apex:page>

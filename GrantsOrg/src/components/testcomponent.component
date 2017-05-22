@@ -1,0 +1,4 @@
+<apex:component >
+  <apex:attribute name="acctRec" type="Account" description="The Account passed in"/>
+  <apex:relatedList subject="{!acctRec}" list="Opportunities"/>
+</apex:component>

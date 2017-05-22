@@ -1,0 +1,166 @@
+<apex:page sidebar="false" showheader="false" doctype="html-5.0" standardStylesheets="false">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+  <style>
+      body{font-family:Consolas,Arial,sans;}
+      div#div1{margin-top:100px;height:100px;}
+      .navbar-brand img{height:90px;margin-top:-15px;}
+      .navbar{height:100px;}
+      .navbar li a{font-size:20px;margin-top:20px;}
+      #minSpacer{height:25px;}
+      #spacer{height:200px;}
+      div#div2{border:1px solid #ffb3e5;}
+      .nav-tabs,.nav-tabs li a,.nav-tabs li.active a,.nav-tabs li.active a:hover{border:0px;}
+      .nav-tabs li.active a,.nav-tabs li a:hover{background-color:#ffb3e5 !important;color:#fff !important;}
+      
+  </style>
+  <body data-spy="scroll" data-target=".navbar" data-offset="80">
+      <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a href="#" class="navbar-brand"><img src="https://upload.wikimedia.org/wikipedia/en/d/d2/Big_Lottery_Fund_logo.png"/></a>
+              </div>
+              <div>
+                  <div id="navBar" class="collpase navbar-collapse">
+                      <ul class="nav navbar-nav navbar-right">
+                          <li><a href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </nav>
+      <div id="div1" class="container">
+          
+      </div>
+      <div id="div2" class="container">
+          <h3>Table with hover effect and automatic scaling</h3>
+                    <table class="table table-hover table-bordered">
+                        <tr>
+                            <th>FNM</th>
+                            <th>LNM</th>
+                            <th>Email</th>
+                        </tr>
+                        <tr>
+                            <td>Joe</td>
+                            <td>Smith</td>
+                            <td>Joe@smith.com</td>
+                        </tr>
+                        <tr>
+                            <td>Teddy</td>
+                            <td>Bear</td>
+                            <td>Teddy@bear.com</td>
+                        </tr>
+                        <tr>
+                            <td>Kit</td>
+                            <td>Kat</td>
+                            <td>Jkit@kat.com</td>
+                        </tr>
+                    </table>
+      </div>
+      <div id="spacer"></div>
+      <div id="div3" class="container">
+          <div>
+              <ul class="nav nav-tabs">
+                  <li class="active"><a href="#organization" data-toggle="tab">Organization</a></li>
+                  <li><a href="#communication" data-toggle="tab">Communication</a></li>
+                  <li><a href="#contact" data-toggle="tab">Contact</a></li>
+                  <li><a href="#project" data-toggle="tab">Project</a></li>
+                   <li><a href="#funding" data-toggle="tab">Funding</a></li>
+                    <li><a href="#outcomes" data-toggle="tab">Outcomes</a></li>
+                     <li><a href="#declaration" data-toggle="tab">Declaration</a></li>
+              </ul>
+          </div>
+          <div class="tab-content">
+              <div id="organization" class="tab-pane fade in active">
+                  <h4>Please Enter your Organization details as per legal documents</h4>
+                  <apex:form >    
+                      <div class="row">
+                          <div class="col-xs-6 col-sm-3">
+                              Organization Name: 
+                          </div>
+                          <div class="col-xs-6 col-sm-3">
+                              <apex:inputtext styleClass="form-control"/>
+                          </div>
+                          <div class="col-xs-6 col-sm-3">
+                              Annual Revenue:
+                          </div>
+                          <div class="col-xs-6 col-sm-3">
+                              <apex:inputtext styleClass="form-control"/>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-xs-6 col-sm-3">
+                              Organization Type: 
+                          </div>
+                          <div class="col-xs-6 col-sm-3">
+                              <apex:inputtext styleClass="form-control"/>
+                          </div>
+                          <div class="col-xs-6 col-sm-3">
+                              Incorporation Year:
+                          </div>
+                          <div class="col-xs-6 col-sm-3">
+                              <apex:inputtext styleClass="form-control"/>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-xs-6 col-sm-3">
+                              Charity Number: 
+                          </div>
+                          <div class="col-xs-6 col-sm-3">
+                              <apex:inputtext styleClass="form-control"/>
+                          </div>
+                          <div class="col-xs-6 col-sm-3">
+                              DUNS Number:
+                          </div>
+                          <div class="col-xs-6 col-sm-3">
+                              <apex:inputtext styleClass="form-control"/>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-xs-6 col-sm-3">
+                              Public Services: 
+                          </div>
+                          <div class="col-xs-6 col-sm-3">
+                              <apex:inputtext styleClass="form-control"/>
+                          </div>
+                          
+                      </div>
+                      <div class="row">
+                          <div class="col-xs-6 col-sm-6">
+                              <apex:commandButton styleClass="btn btn-primary" value="Save"/>
+                          </div>
+                          <div class="col-xs-4 col-sm-4">
+                          </div>
+                          <div class="col-xs-2 col-sm-2 text-right">
+                             <apex:commandButton styleClass="btn btn-default" value="Prev"/>
+                             <apex:commandButton styleClass="btn btn-default" value="Next"/>
+                          </div>
+                      </div>
+                     </apex:form>
+              </div>
+              <div id="communication"  class="tab-pane fade">
+                  div1
+              </div>
+              <div id="contact"  class="tab-pane fade">
+                  22222222
+              </div>
+              <div id="project"  class="tab-pane fade">
+                  3333.........div3
+              </div>
+          </div>
+          
+      </div>
+      <div style="height:75px;">
+      &nbsp;
+      </div>
+  </body>
+</apex:page>

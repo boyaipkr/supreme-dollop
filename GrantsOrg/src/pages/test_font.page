@@ -1,0 +1,90 @@
+<apex:page sidebar="false" showheader="false" standardStylesheets="false" controller="myClass" doctype="HTML-5.0">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    <style>
+       *{
+            font-family: 'Ubuntu', sans-serif;
+        }
+        .hide{
+            display:none;
+        }
+        .unhide{
+            display:block;
+        }
+        .div{
+            border:2px solid black;
+            box-shadow:1px 2px 0px 0px grey;
+            float:right;
+            font-size:15px;
+            margin-top:200px;
+            margin:10px;
+            width:25%;
+        }
+        .div .header{
+            background-color:pink;
+            box-shadow:0px 2px 0px 0px;
+            color:#ef3499;
+            font-size:20px;
+            font-weight:bold;
+            height:20px;
+            padding:10px;
+        }
+        input[type="text"], input[type="password"], input[type="email"]{
+            border:none;
+            padding:8px;
+            width:80%;
+        }
+        input[type="submit"]{
+            margin:5px;
+            padding:5px;    
+            width:150px;
+        }
+        input[type="submit"]:hover{
+            cursor:pointer;
+            box-shadow:1px 1px 1px 1px grey;
+        }
+        .div .icons{
+            height:30px;
+            margin:5px;
+            padding:5px;
+        }
+        .div .buttons{
+            float:right;
+            clear:both;
+            margin-right:8%;
+        }
+    </style>
+    <script>
+        function sayHello(){
+            alert("Hello");
+        }
+        function enableP(){
+            alert('hi '+document.getElementById("para").className);
+            document.getElementById("para").className="unhide";
+        }
+    </script>
+    <apex:form id="form">
+        <apex:outputText id="out1" value="{!out1}"/>
+        <div id="body">
+           
+            <div class="div">
+                <div class="header">Sign In</div>
+                <div class="spacer"></div>
+                <div>
+                    <div class="icons"><i class="fa fa-envelope"></i>&nbsp;&nbsp;<apex:input type="email" html-placeholder="Email" value="{!usr}"/></div>
+                    <div class="icons"><i class="fa fa-key"></i>&nbsp;&nbsp;<apex:inputsecret html-placeholder="Password" value="{!pass}"/></div>
+                </div>
+                <div class="buttons">
+                    <apex:commandButton styleClass="apexBtns" value="Log In" rerender="out1" action="{!mailCheck}"/>
+                </div>
+            </div>
+                        
+        </div>
+        <apex:commandButton id="btn" onclick="enableP();" value="Click" rerender="para"/>
+        <table>
+            <tr>
+                <th id="para" class="hide">Header</th>
+            </tr>
+        </table>
+    </apex:form>
+</apex:page>

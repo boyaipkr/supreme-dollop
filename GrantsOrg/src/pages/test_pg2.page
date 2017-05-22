@@ -1,0 +1,11 @@
+<apex:page controller="slctOptn">
+    
+        <apex:outputtext id="Outputtext1" value="{!selectedPkVal}" label="Selected Text: "/>
+
+    <apex:form >
+        <apex:selectList value="{!selectedPkVal}" size="1">
+            <apex:actionsupport event="onchange" rerender="Outputtext1" action="{!callApex}"/>
+            <apex:selectOptions value="{!var}"/>
+        </apex:selectList>
+    </apex:form>
+</apex:page>

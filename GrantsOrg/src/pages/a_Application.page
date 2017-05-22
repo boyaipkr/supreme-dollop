@@ -1,0 +1,86 @@
+<apex:page controller="getUser" sidebar="false" action="{!chkLogin}">
+    <style>
+        table{
+            font-family:Consolas,Courier,Arial;
+            font-size:15px;
+            width:100%;
+        }
+    
+    </style>
+  <apex:form >
+      <apex:outputText >Your Applications: </apex:outputText>
+      <apex:selectList value="{!appNm}" size="1" multiselect="false">
+          <apex:actionSupport event="onchange" rerender="pageBlock,txt" action="{!getAppDetail}"/>
+          <apex:selectOptions value="{!appNms}"/>  
+      </apex:selectList>
+      
+      <apex:pageblock id="pageBlock" title="Application Details">
+           <apex:repeat value="{!myApp}" var="app">
+          <table>
+              <tr>
+                  <td>Application Number: </td>
+                  <td>{!app.OrderNumber}</td>
+                  <td>Grantee Name: </td>
+                  <td>{!app.Account.name}</td>
+              </tr>
+              <tr>
+                  <td>Application Name: </td>
+                  <td>{!app.Name}</td>
+                  <td>Grantee Status: </td>
+                  <td>{!app.Grantee_Status__c}</td>
+              </tr>
+              <tr>
+                  <td>Application Record Type: </td>
+                  <td>{!app.Application_Record_Type__c}</td>
+                  <td>Contact Person Name: </td>
+                  <td>{!app.Contact_Person_Name__r.Name}</td>
+              </tr>
+              <tr>
+                  <td>Program Name: </td>
+                  <td>{!app.Program_Name_2__r.Name}</td>
+                  <td>Contact Person Status: </td>
+                  <td>{!app.Contact_Person_Status__c}</td>
+              </tr>
+              <tr>
+                  <td>Application Start Date: </td>
+                  <td>{!app.EffectiveDate}</td>
+                  <td>Application End Date: </td>
+                  <td>{!app.End_Date__c}</td>
+              </tr>
+              <tr>
+                  <td>Owner: </td>
+                  <td>{!app.Owner.name}</td>
+        <!--          <td>Agreement: </td>
+                  <td>{!app.Agreement__c}</td>   -->
+              </tr>
+              <tr>
+                  <td>Grant Amount: </td>
+                  <td>{!app.Grant_Amount__c}</td>
+                  <td>Status: </td>
+                  <td>{!app.Status}</td>
+              </tr>
+              <tr>
+                  <td>Decision Case: </td>
+                  <td>{!app.Decision_Case__r.Subject}</td>
+                 
+              </tr>
+              
+          </table>
+          
+          <apex:pageblockSection title="Program Outcome">
+              <table>
+                  <tr>
+                      <td>Outcomes</td>
+                      <td>{!app.Outcomes__c}</td>
+                  </tr>
+              </table>
+          
+          </apex:pageblockSection>
+          
+          </apex:repeat>
+          
+      </apex:pageblock>
+      
+  </apex:form>
+  <apex:outputText id="txt" value="{!outTxt}">App No: </apex:outputText>
+</apex:page>

@@ -1,0 +1,7 @@
+<apex:page >
+  <!-- Begin Default Content REMOVE THIS -->
+  <apex:form >
+  <apex:commandButton value="Verify This (VF)" action="{!verify}"/>
+  </apex:form>
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

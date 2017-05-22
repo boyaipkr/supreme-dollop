@@ -1,0 +1,14 @@
+<apex:page controller="ContactCreateController">  
+  <apex:sectionHeader title="Visualforce Example" subtitle="Thank You"/>
+
+  <apex:form >
+    <apex:pageBlock title="Contact Info">
+
+      <apex:pageBlockSection showHeader="false" columns="2">
+        <apex:outputField value="{!Contact.Phone}" />
+        <apex:outputField value="{!Contact.lastName}" />
+        <apex:outputField value="{!Contact.Email}" />
+      </apex:pageBlockSection>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

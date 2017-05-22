@@ -1,0 +1,7 @@
+<apex:page standardController="Task">
+<apex:form >
+<apex:pageblock >  
+              <apex:pageMessage severity="Wow" >Verified!!</apex:pageMessage> 
+</apex:pageblock>
+</apex:form>  
+</apex:page>

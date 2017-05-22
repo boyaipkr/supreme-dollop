@@ -1,0 +1,32 @@
+<apex:component controller="loginCmpController">
+    <table id="loginTable">
+        <tr>
+            <td>
+                <apex:outputLabel value="User ID"/>
+            </td>
+            <td>
+                <apex:inputText value="{!usrid}"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <apex:outputLabel value="Password"/>
+            </td>
+            <td>
+                <apex:inputText value="{!password}"/>
+            </td>
+        </tr>
+        <tr>
+            <td/>
+            <td>
+                <div align="right">
+                    <apex:commandButton value="Login" action="{!checkLogin}"/>
+                </div>
+            </td>
+        </tr>
+    	<tr>
+            <td>{!output}</td>
+            <td/>
+        </tr>
+    </table>
+</apex:component>

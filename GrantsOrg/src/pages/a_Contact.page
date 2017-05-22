@@ -1,0 +1,102 @@
+<apex:page controller="getUser" action="{!getContact}">
+
+    <style>
+       table{
+            font-family:courier,consolas,Arial;
+            font-size:15px;
+            width:100%;
+        }
+        td{
+            position:relative;
+            
+        }
+        [id*=btn]{
+            border:solid;
+            font-famile:consolas,sans;
+        }
+    
+    </style>
+
+
+  <apex:outputText value="{!myStr}"></apex:outputText>
+  <apex:form > 
+      <apex:commandLink id="btn" value="Account" action="{!redrAccount}"/>
+       <apex:pageblock title="Contact Person Details">
+           <table>
+              <apex:repeat value="{!myCntct}" var="con">
+                  <tr>
+                      <td><apex:outputText >Name: </apex:outputText></td>
+                      <td ><apex:outputText value="{!con.name}"></apex:outputText></td>
+                      <td><apex:outputText >Employee Responsible: </apex:outputText></td>
+                      <td><apex:outputText value="{!con.owner.name}"></apex:outputText></td>
+                  </tr>
+                 <tr>
+                      <td><apex:outputText >Org Name: </apex:outputText></td>
+                      <td><apex:outputText >{!con.account.name}</apex:outputText></td>
+                      <td><apex:outputText >Contact Status: </apex:outputText></td>
+                      <td><apex:outputText >{!con.Contact_Status__c}</apex:outputText></td>
+                  </tr>
+                   <tr>
+                      <td><apex:outputText >DOB: </apex:outputText></td>
+                      <td><apex:outputText >{!con.Date_of_Birth__c}</apex:outputText></td>
+                    
+                  </tr>
+              </apex:repeat>
+          </table>
+       </apex:pageblock>
+       
+       <apex:pageblock title="Address Details">
+           <table>
+              <apex:repeat value="{!myCntct}" var="con">
+                  <tr>
+                      <td><apex:outputText >Address Line1: </apex:outputText></td>
+                      <td ><apex:outputText value="{!con.Address_Line1__c}"></apex:outputText></td>
+                      <td><apex:outputText >Address Line2: </apex:outputText></td>
+                      <td><apex:outputText value="{!con.Address_Line2__c}"></apex:outputText></td>
+                  </tr>
+                 <tr>
+                      <td><apex:outputText >City: </apex:outputText></td>
+                      <td><apex:outputText >{!con.City__c}</apex:outputText></td>
+                      <td><apex:outputText >State/Province: </apex:outputText></td>
+                      <td><apex:outputText >{!con.State_Province__c}</apex:outputText></td>
+                  </tr>
+                   <tr>
+                      <td><apex:outputText >Zip/Postal Code: </apex:outputText></td>
+                      <td><apex:outputText >{!con.ZIP_Postal_Code__c}</apex:outputText></td>
+                       <td><apex:outputText >Country: </apex:outputText></td>
+                      <td><apex:outputText >{!con.Country__c}</apex:outputText></td>
+                  </tr>
+              </apex:repeat>
+          </table>
+        </apex:pageblock>  
+         
+        <apex:pageblock title="Communication Details">
+           <table>
+              <apex:repeat value="{!myCntct}" var="con">
+                  <tr>
+                      <td><apex:outputText >Phone: </apex:outputText></td>
+                      <td ><apex:outputText value="{!con.phone}"></apex:outputText></td>
+                      <td><apex:outputText >Mobile: </apex:outputText></td>
+                      <td><apex:outputText value="{!con.MobilePhone}"></apex:outputText></td>
+                  </tr>
+                 <tr>
+                      <td><apex:outputText >Fax: </apex:outputText></td>
+                      <td><apex:outputText >{!con.Fax}</apex:outputText></td>
+                      <td><apex:outputText >Internet User: </apex:outputText></td>
+                      <td><apex:outputText >{!con.Internet_User__c}</apex:outputText></td>
+                  </tr>
+                   <tr>
+                      <td><apex:outputText >Email: </apex:outputText></td>
+                      <td><apex:outputText >{!con.Email}</apex:outputText></td>
+                      
+                  </tr>
+              </apex:repeat>
+          </table> 
+       
+       </apex:pageblock>
+       
+  </apex:form>
+  
+<!--  <apex:outputText value="{!myCntct.Email}"></apex:outputText>
+-->
+</apex:page>

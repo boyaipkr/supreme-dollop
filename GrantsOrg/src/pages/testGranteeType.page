@@ -1,0 +1,13 @@
+<apex:page controller="test_gType"> 
+  Location Table
+  <apex:messages style="color:red"></apex:messages>
+   
+    <apex:form >
+        <apex:pageblock >
+            <apex:selectList value="{!type}">
+                <apex:selectOptions value="{!List}"/>
+            </apex:selectList>   
+        </apex:pageblock>
+    </apex:form>
+   
+</apex:page>

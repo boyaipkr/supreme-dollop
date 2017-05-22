@@ -1,0 +1,14 @@
+<apex:page showHeader="false" >
+    <apex:pageBlock title="A block Title">
+        <apex:pageBlockSection title="A section Title">
+            I m 3 components deep.
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="A New Section">
+            This is another section.<br/>
+            {! $User.FirstName & ' ' & $User.LastName}<br/>
+            <p>Todays Date is: {! TODAY()}</p>
+            <p>Suare root of 49 is: {! SQRT(49)}</p>
+            <p>Does "Salesforce.com" contains "force"?? {! CONTAINS('salesforce.com','force')}</p>
+        </apex:pageBlockSection> 
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,47 @@
+<apex:page controller="myClass2" showHeader="false" doctype="HTML-5.0">
+    <apex:form id="form">
+        <apex:tabPanel >
+            <apex:tab label="one">
+                <p>Tab one Content</p>
+                <apex:outputtext id="out1" value="{!out1}" escape="false"/>
+                <apex:commandButton value="Save" action="{!mySave}" rerender="dataTable,out1,rpt"/>
+                <table id="dataTable" style="border:2px solid green">
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Capital</th>
+                        <th>&nbsp;</th>
+                        <th>Revenue</th>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                             <table style="border:2px solid blue">
+                             <apex:repeat value="{!capitals}" var="c" id="rpt">
+                             <tr>
+                                    <td><apex:inputtext value="{!capitals[c]}"/></td>
+                                </tr>
+                                </apex:repeat>
+                            </table>
+                        
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>
+                             <table style="border:2px solid aqua">
+                                <apex:repeat value="{!revenues}" var="r">
+                                <tr>
+                                    <td><apex:inputtext value="{!revenues[r]}"/></td>
+                                </tr>
+                                </apex:repeat>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </apex:tab>
+            <apex:tab label="two">
+            
+            </apex:tab>
+        </apex:tabPanel>
+    </apex:form>
+    
+</apex:page>

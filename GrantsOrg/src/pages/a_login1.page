@@ -1,0 +1,16 @@
+<apex:page standardController="Account" extensions="accSearchController">
+    <apex:form >
+        <apex:inputText value="{!searchString}" label="Input"/>
+        <apex:commandButton value="Search Records" action="{!search}"/>
+        <apex:pageblock title="Search Result">
+            <apex:pageblockTable value="{!acc}" var="a">
+                <apex:column >
+                    <apex:outputLink value="https://ap2.salesforce.com/{!a.id}">
+                        {!a.Name}
+                    </apex:outputLink>
+                </apex:column>
+                <apex:column value="{!a.id}"/>
+            </apex:pageblockTable>
+        </apex:pageblock>
+    </apex:form> 
+</apex:page>

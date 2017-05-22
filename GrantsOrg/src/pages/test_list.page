@@ -1,0 +1,56 @@
+<apex:page controller="myClass" showHeader="false" doctype="HTML-5.0">
+    <script>
+       
+    </script>
+    <apex:form id="form">
+        <apex:tabpanel style="width:50%;margin-left:25%;margin-top:5%;">
+            <apex:tab label="one">
+                <p>Content of Tab One.</p>
+                <apex:outputtext value="{!out1}" escape="false"/>
+                <table style="border:2px solid green;width:100%">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><apex:input type="date" id="dt1" value="{!d1}"/></td>
+                        <td>&nbsp;</td>
+                        <td><apex:input type="date" id="dt2" value="{!d2}"/><apex:commandButton value="Add Fields" action="{!getYear}" rerender="form"/>
+                            <apex:commandButton value="goDynamic" action="{!getValues}" rerender="form"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Capital</th>
+                        <th>&nbsp;</th>
+                        <th>Revenue</th>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <apex:repeat value="{!iterator}" var="c">
+                            <table style="border:2px solid blue">
+                                <tr>
+                                    <td><apex:inputtext value="{!capitals[c]}"/></td>
+                                </tr>
+                            </table>
+                            </apex:repeat>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>
+                            <apex:repeat value="{!iterator}" var="r">
+                            <table>
+                                <tr>
+                                    <td><apex:inputtext value="{!revenues[r]}"/></td>
+                                </tr>
+                            </table>
+                            </apex:repeat>
+                        </td>
+                    </tr>
+                </table>
+            </apex:tab>
+        </apex:tabpanel>           
+    </apex:form>
+    <br/><br/>
+    
+    
+</apex:page>

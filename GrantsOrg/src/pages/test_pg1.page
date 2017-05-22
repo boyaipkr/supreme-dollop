@@ -1,0 +1,14 @@
+<apex:page controller="myController" >
+   <apex:form >
+        <apex:inputText value="{!myStr}"/>
+        <apex:commandButton value="Click Here" action="{!redr}"/>
+   </apex:form>
+   <apex:form >
+       <apex:selectList value="{!selectedVal}" size="1" multiselect="false">
+           <apex:selectOptions value="{!opn}">
+         <!--      <apex:actionSupport rerender="outTxt" event="onchange" action="{!callFn}"/>
+    -->       </apex:selectOptions>
+       </apex:selectList>
+    </apex:form>
+     <apex:outputText id="outTxt" label="Selected Account: " value="{!selectedVal}"/>
+</apex:page>

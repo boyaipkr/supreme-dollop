@@ -1,0 +1,49 @@
+<apex:page controller="getUser" sidebar="false" action="{!chkLogin}">
+    <Style>
+        #options{
+            border-width:2px;
+            background-color:#11a3f2;
+            color:white;
+            display:inline;
+            font-family:consolas;
+            font:30px;
+            height:300px;
+            text-align:center;
+            width:250px;
+            border:solid;
+            
+        }
+        #optn{
+            width:150px;
+            height:200px;
+            font-size:25px;
+            display:inline;
+        }
+    
+    </style>
+  <apex:form >
+      <div id="optn">
+          <div id="options"><apex:commandLink value="Account" action="{!redrAccount}"/></div>
+          <div id="options"><apex:commandLink value="Contacts" action="{!redrCntct}"/></div>
+          <div id="options"><apex:commandLink value="Applications" action="{!redrApplication}"/></div>
+      </div>
+  </apex:form>
+  <div><apex:form >
+      <apex:pageBlock >
+          <apex:pageblockTable value="{!myUser}" var="my">
+              <apex:column value="{!my.id}"/>
+              <apex:column value="{!my.user_Account__c}"/>
+              <apex:column >
+                  <a href="https://ap2.salesforce.com/{!myStr}">Account Detail</a>
+              </apex:column>
+              <apex:column value="{!myStr}">
+              </apex:column>
+              <apex:column value="{!cId}"/>
+              <apex:column ><a href="https://ap2.salesforce.com/{!cId}">Contact</a></apex:column>
+          </apex:pageblockTable>
+      </apex:pageBlock>
+      
+      </apex:form>
+  </div>
+ 
+</apex:page>

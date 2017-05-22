@@ -1,0 +1,106 @@
+<apex:page controller="getUser" action="{!getAccount}">
+    <style>
+        table{
+            font-family:consolas;
+            font-size:15px;
+            width:100%;
+        }
+        [id*=myId]{
+            color:red;
+            font-family:consolas,courier,Arial;
+            font-size:50px;
+        }
+        #cntct{
+            width:50px;
+            border:solid;
+            font-family:consolar;
+            font-size:15px;
+        }
+        #cntct:hover{
+            border-color:#34acde;
+        }
+    </style>
+  <apex:form >
+       <div id="cntct"><apex:commandLink value="Contact" action="{!redrCntct}"/></div>
+      <apex:pageBlock Title="Organization Details">
+      
+          <table>
+              <apex:repeat value="{!acnt}" var="ac">
+                  <tr>
+                      <td><apex:outputText >Org Name: </apex:outputText></td>
+                      <td ><apex:outputText value="{!ac.name}"></apex:outputText></td>
+                      <td><apex:outputText >Grantee Status: </apex:outputText></td>
+                      <td><apex:outputText value="{!ac.Grantee_Status__c}"></apex:outputText></td>
+                  </tr>
+                  <tr>
+                      <td><apex:outputText >Grantee Type: </apex:outputText></td>
+                      <td><apex:outputText >{!ac.Grantee_Type__c}</apex:outputText></td>
+                      <td><apex:outputText >Annual Revenue: </apex:outputText></td>
+                      <td><apex:outputText >{!ac.AnnualRevenue}</apex:outputText></td>
+                  </tr>
+                   <tr>
+                      <td><apex:outputText >Grantee SubType: </apex:outputText></td>
+                      <td><apex:outputText >{!ac.GranteeSubType__c}</apex:outputText></td>
+                      <td><apex:outputText >Foundation Year: </apex:outputText></td>
+                      <td><apex:outputText >{!ac.YearStarted}</apex:outputText></td>
+                  </tr>    
+              </apex:repeat>
+          </table>
+    <!--     
+          <apex:pageBlockTable value="{!acnt}" var="ac">
+              <apex:column value="{!ac.name}"/>
+              <apex:column value="{!ac.Address_Line1__c}"/>
+              <apex:column value="{!ac.City__c}"/>
+              <apex:column value="{!ac.Country__c}"/>
+          </apex:pageBlockTable>
+-->
+      </apex:pageBlock>
+      
+      <apex:pageBlock Title="Address Details">
+      
+          <table>
+              <apex:repeat value="{!acnt}" var="ac">
+                  <tr>
+                      <td><apex:outputText >Address Line1: </apex:outputText></td>
+                      <td ><apex:outputText value="{!ac.Address_Line1__c}"></apex:outputText></td>
+                      <td><apex:outputText >Address Line2: </apex:outputText></td>
+                      <td><apex:outputText value="{!ac.Address_Line2__c}"></apex:outputText></td>
+                  </tr>
+                  <tr>
+                      <td><apex:outputText >City: </apex:outputText></td>
+                      <td><apex:outputText >{!ac.City__c}</apex:outputText></td>
+                      <td><apex:outputText >State/Province: </apex:outputText></td>
+                      <td><apex:outputText >{!ac.State_Province__c}</apex:outputText></td>
+                  </tr>
+                   <tr>
+                      <td><apex:outputText >Zip/Postal code: </apex:outputText></td>
+                      <td><apex:outputText >{!ac.ZIP_Postal_Code__c}</apex:outputText></td>
+                      <td><apex:outputText >Country: </apex:outputText></td>
+                      <td><apex:outputText >{!ac.Country__c}</apex:outputText></td>
+                  </tr>    
+              </apex:repeat>
+          </table>
+      </apex:pageBlock>
+      
+      <apex:pageBlock Title="Communication Details">
+      
+          <table>
+              <apex:repeat value="{!acnt}" var="ac">
+                  <tr>
+                      <td><apex:outputText >Phone: </apex:outputText></td>
+                      <td ><apex:outputText value="{!ac.phone}"></apex:outputText></td>
+                      <td><apex:outputText >Fax: </apex:outputText></td>
+                      <td><apex:outputText value="{!ac.fax}"></apex:outputText></td>
+                  </tr>
+                  <tr>
+                      <td><apex:outputText >Website: </apex:outputText></td>
+                      <td><apex:outputText >{!ac.website}</apex:outputText></td>
+                      
+                  </tr>
+                     
+              </apex:repeat>
+          </table>
+      </apex:pageBlock>
+
+  </apex:form>
+</apex:page>

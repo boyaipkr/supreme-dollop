@@ -1,0 +1,3 @@
+<apex:page controller="redirectTaskController" action="{!redirectToTask}" >
+    <p>Redirecting to task</p>
+</apex:page>

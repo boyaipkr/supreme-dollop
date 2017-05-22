@@ -1,0 +1,790 @@
+<apex:page id="pg" controller="BigClassCopy" sidebar="false" showheader="false" doctype="html-5.0" standardStylesheets="false">
+     <head>
+         <meta charset="utf-8"/>
+         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+         
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+         <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'/>
+         
+         <apex:include pageName="BigScriptCopy"/>
+         
+         <style>
+             body{font-family:Lato,Arial,Sans;}
+             .spacer{height:100px;}
+             .minSpacer{height:25px;}
+             .row{margin-top:5px;}
+             .buttons{text-align:right;}
+             
+             .margin1{
+                 margin-right:10%;
+                 width:80%;
+             }
+             
+             .navbar li a,.navbar-brand{
+                 line-height:70px;
+                 height:70px;
+                 padding-top:0px;
+             }
+             .navbar-brand img{height:70px;}
+             
+             #navTabs{border:0px;}
+             .nav-tabs li a{
+                background-color:#e6e6e6 !important;
+                color:#000;
+             }
+             
+             .row-eq-height {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+             }
+             .nav-tabs li a:hover, .nav-tabs li.active a{color:#fff !important;background-color:#ffb3ee !important;}
+             
+             #bigFooter{
+                 background-image:url('https://lh4.googleusercontent.com/-sGks2m-eVtc/VUsrUf3tDiI/AAAAAAAAAZs/QQKZ2BAG5Hw/w1039-h92-no/footer%2Blogo.png');
+                 min-height:92px;
+                 background-repeat:repeat-x;
+                 background-color:#56aa4f;
+            }
+            #footerLogo{
+                min-height:42px;
+                width:100%;
+                background-color:Gainsboro;
+            }
+            #footerLogo img{
+                
+            }
+         </style>
+         
+     </head>
+     <body data-spy="scroll" data-target=".navBar" data-offset="80">
+         <nav class="navbar navbar-default navbar-fixed-top">
+             <div class="container-fluid">
+                 <div class="navbar-header">
+                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                     </button>
+                     <a href="#" class="navbar-brand"><img src="https://upload.wikimedia.org/wikipedia/en/d/d2/Big_Lottery_Fund_logo.png"/></a>
+                 </div>
+                 <div>
+                     <div id="navBar" class="navbar-collapse collapse">
+                         <ul class="nav navbar-nav navbar-right">
+                             <li><a href="http://my1sttest-developer-edition.ap2.force.com"><i class="fa fa-sign-out"></i>Logout</a></li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+         </nav>
+         <div class="container">
+            <div class="spacer" style="margin-top:80px"></div>
+            <div id="error" class="container">
+                <center><apex:outputText id="outTxt" value="{!outTxt}" escape="false"/></center>
+            </div>
+            <div class="container margin1">
+                <div class="row"> 
+                    <!-- following column holds only menu tabs -->
+                    <div class="col-xs-12 col-sm-12">
+                        <ul id="navTabs" class="nav nav-tabs">
+                            <li class="active"><a href="#organization">Organization</a></li>
+                            <li><a href="#communication">Communication</a></li>
+                            <li ><a href="#contact">Contact</a></li>
+                            <li><a href="#project">Project</a></li>
+                            <li><a href="#funding">Funding</a></li>
+                            <li><a href="#outcomes">Outcomes</a></li>
+                            <li><a href="#declaration">Declaration</a></li>
+                        </ul>
+                    </div>
+                    <!-- menu tabs coloumn ends here -->
+                    
+                    
+                    <!-- coloumn holding tab pane starts here -->
+                    
+                    <div class="col-xs-12 col-sm-12">
+                        <apex:form id="form">
+                        <div class="tab-content">
+                            <div id="organization" class="tab-pane fade in active">
+                                <h4>Enter your organization&#39;s details</h4><br/>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Organization&#39;s Name:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="orgNm" styleClass="form-control" value="{!formData.Organization_Name__c}" html-placeholder="Full Legal Name"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        Annual Revenue:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext styleClass="form-control" value="{!formData.Annual_Revenue__c}" html-placeholder="in GBP"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Organization Type:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:selectList value="{!formData.Organization_Type__c}"  size="1" multiselect="false" styleClass="form-control">
+                                            <apex:selectOptions value="{!org}" /> 
+                                        </apex:selectList>
+                                        
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        Incorporation Year:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext styleClass="form-control"  value="{!formData.Foundation_Year__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Charity Number:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext styleClass="form-control"  value="{!formData.Charity_Number__c}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        DUNS Number:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext styleClass="form-control"  value="{!formData.DUNS_Number__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Public Services:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                       <apex:selectList styleClass="form-control"  value="{!formData.Public_Services__c}" size="1" multiselect="false">
+                                            <apex:selectOptions value="{!publicServices}"/>
+                                        </apex:selectList>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputHidden id="acntId" value="{!acntId}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                          
+                                    </div>
+                                </div>
+                                <br/>      
+                                <div class="row buttons">
+                                    <div class="col-xs-6 col-sm-1">
+                                        <apex:commandButton styleClass="btn btn-primary" value="Save" id="orgBtn" onclick="return validate(this.id);" action="{!saveFormDetail}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-8">
+                                        
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <a id="next1" href="#"><i class="fa fa-arrow-circle-right fa-2x"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="communication" class="tab-pane fade">
+                                <h4>Enter registered address of your organization</h4><br/>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Address Line1:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="coadL1" styleClass="form-control" value="{!formData.Address_Line_1__c}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        Address Line2:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext styleClass="form-control" value="{!formData.Address_Line_2__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        City/Town:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="city1" styleClass="form-control" value="{!formData.City_Town__c}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        State/Province:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="state1" styleClass="form-control" value="{!formData.State_Province__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Country:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:selectList id="country1" styleClass="form-control" value="{!formData.Country__c}" size="1" multiselect="false" >
+                                            <apex:selectOptions value="{!countryNm}"/>
+                                        </apex:selectList>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        ZIP/Postal Code:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="zip1" styleClass="form-control" value="{!formData.Zip_Postal_Code__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Phone:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="phone1" styleClass="form-control" value="{!formData.Phone__c}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        Fax:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                          <apex:inputtext styleClass="form-control" value="{!formData.Fax__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Website:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext styleClass="form-control" value="{!formData.Website__c}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                       
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                         
+                                    </div>
+                                </div>
+                                <br/>      
+                                <div class="row buttons">
+                                    <div class="col-xs-6 col-sm-1">
+                                        <apex:commandButton styleClass="btn btn-primary" value="Save" id="comBtn" onclick="return validate(this.id);" action="{!saveFormDetail}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-8">
+                                        
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <a id="back1" href="#"><i class="fa fa-arrow-circle-left fa-2x"></i></a>
+                                        <a id="next2" href="#"><i class="fa fa-arrow-circle-right fa-2x"></i></a>
+                                    </div>
+                                </div>   
+                            </div>
+                            <!--        CONTACT TAB    -->
+                            <div id="contact" class="tab-pane fade">
+                                <h4>Your contact person&#39;s details</h4><br/>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Title:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:selectList id="title" styleClass="form-control" value="{!formData.Title__c}" size="1" multiselect="false">
+                                            <apex:selectOptions value="{!myTitle}"/>
+                                        </apex:selectList>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        First Name:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="fnm" styleClass="form-control" value="{!formData.First_Name__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Last Name:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="lnm" styleClass="form-control" value="{!formData.Last_Name__c}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        Date of Birth:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:input id="dob" type="date" styleClass="form-control" value="{!dob}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Address Line1:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="c_adL1" styleClass="form-control" value="{!formData.CP_Address_Line_1__c}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        Address Line2:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext styleClass="form-control" value="{!formData.CP_Address_Line_2__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        City/Town:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="c_city" styleClass="form-control" value="{!formData.CP_City_Town__c}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        State/Province:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="c_state" styleClass="form-control" value="{!formData.CP_State_Province__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Country:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:selectList id="c_country" styleClass="form-control" value="{!formData.CP_Country__c}" size="1" multiselect="false">
+                                            <apex:selectOptions value="{!countryNm}"/>
+                                        </apex:selectList>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        ZIP/Postal Code:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="c_zip" styleClass="form-control" value="{!formData.CP_Zip_Postal_Code__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Phone:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="c_phone" styleClass="form-control" value="{!formData.CP_Phone__c}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        Fax:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                          <apex:inputtext styleClass="form-control" value="{!formData.CP_Fax__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Mobile:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext styleClass="form-control" value="{!formData.CP_Mobile__c}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        Email:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                         <apex:inputtext id="c_email" styleClass="form-control" value="{!formData.CP_Email__c}"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Preferred Langauge:
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:selectList styleClass="form-control" value="{!formData.Preferred_Language__c}" size="1" multiselect="false">
+                                            <apex:selectoptions value="{!prefLang}"/>
+                                        </apex:selectList>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                         
+                                    </div>
+                                </div>
+                                <br/>      
+                                <div class="row buttons">
+                                    <div class="col-xs-6 col-sm-1">
+                                        <apex:commandButton styleClass="btn btn-primary" value="Save" id="contactBtn" onclick="return validate(this.id);" action="{!saveFormDetail}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-8">
+                                        
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <a id="back2" href="#"><i class="fa fa-arrow-circle-left fa-2x"></i></a>
+                                        <a id="next3" href="#"><i class="fa fa-arrow-circle-right fa-2x"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--        PROJECT TAB    -->
+                            <div id="project" class="tab-pane fade">
+                                <h4>About your project</h4><br/>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Project Title:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:inputtext id="ptitle" styleClass="form-control" value="{!formData.Project_Title__c}" title="Give your project a short title"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        Fund Programme:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:selectList id="pname" styleClass="form-control" value="{!formData.Fund_Program__c}" size="1" multiselect="false"  title="Project you are applying for">
+                                            <apex:selectOptions value="{!projects}"/>
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12">
+                                        Please provide more details about your project (6000 Characters):
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12"> 
+                                        <apex:inputtextarea styleClass="form-control" rows="5" value="{!formData.Project_Details__c}" title="Summarize what you plan to do"/>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row buttons">
+                                    <div class="col-xs-6 col-sm-1">
+                                        <apex:commandButton styleClass="btn btn-primary" value="Save" id="projectBtn" onclick="return validate(this.id);" action="{!saveFormDetail}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-8">
+                                        
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <a id="back3" href="#"><i class="fa fa-arrow-circle-left fa-2x"></i></a>
+                                        <a id="next4" href="#"><i class="fa fa-arrow-circle-right fa-2x"></i></a>
+                                    </div>
+                                </div>
+                                
+                             </div>
+                            <div id="funding" class="tab-pane fade">
+                                <h4>Funding Data</h4><br/>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3">
+                                        Project Start Date:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:input type="date" styleClass="form-control"  id="sdate" value="{!startDate}" title="when do you plan to start your project"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        Project End Date:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:input type="date" styleClass="form-control" id="edate" value="{!endDate}" title="when do you plan to end your project"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 text-right">
+                                        <apex:commandButton styleClass="btn btn-default" value="Input Budget" id="dateBtn" onclick="return validate(this.id);" action="{!getDates}"/>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="hidden-xs col-sm-3 text-center" >&nbsp;</div>
+                                    <div class="col-xs-6 col-sm-3 text-center" id="capital">Capital&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    <div class="hidden-xs col-sm-3 text-center">&nbsp;</div>
+                                    <div class="col-xs-6 col-sm-3 text-center" id="revenue">Revenue</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <apex:repeat value="{!iterator}" var="c">
+                                            <div class="row">
+                                                <div class="col-xs-6 col-sm-3">Year {!c+1} (in £)</div>
+                                                <div class="col-xs-12 col-sm-9">
+                                                    <apex:inputtext styleClass="form-control" value="{!capitals[c]}" html-placeholder="in £"/>
+                                                </div>
+                                            </div>
+                                        </apex:repeat>
+                                   </div>
+                                   <div class="col-sm-6">
+                                        <apex:repeat value="{!iterator}" var="r">
+                                            <div class="row">
+                                                <div class="col-sm-3">&nbsp;</div>
+                                                <div class="col-sm-9">
+                                                    <apex:inputtext styleClass="form-control" value="{!revenues[r]}" html-placeholder="in £"/>
+                                                </div>
+                                                
+                                            </div>
+                                        </apex:repeat>
+                                   </div>     
+                                </div>
+                                <br/>
+                                <div class="row buttons">
+                                    <div class="col-xs-6 col-sm-1">
+                                        <apex:commandButton styleClass="btn btn-primary" value="Save" id="fundBtn" onclick="return validate(this.id);" action="{!saveFormDetail}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-8">
+                                        
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <a id="back4" href="#"><i class="fa fa-arrow-circle-left fa-2x"></i></a>
+                                        <a id="next5" href="#"><i class="fa fa-arrow-circle-right fa-2x"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="outcomes" class="tab-pane fade">
+                                <h4>How will people benefit from your project</h4><br/>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12">
+                                        Please enter outcomes:
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12">
+                                        Outcome1:<span style="color:red;font-weight:bold">*</span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12">
+                                        <apex:inputtextarea id="outcome1" styleClass="form-control" rows="3" value="{!outcomes[0]}"/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12">
+                                        Outcome2:
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12">
+                                        <apex:inputtextarea styleClass="form-control" rows="3" value="{!outcomes[1]}"/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12">
+                                        Outcome3:
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12">
+                                        <apex:inputtextarea styleClass="form-control" rows="3" value="{!outcomes[2]}"/>
+                                    </div>
+                                    
+                                </div>
+                                <br/>
+                                <div class="row buttons">
+                                    <div class="col-xs-6 col-sm-1">
+                                        <apex:commandButton styleClass="btn btn-primary" value="Save"  id="outcomesBtn" onclick="return validate(this.id);" action="{!saveFormDetail}"/>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-8">
+                                        
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <a id="back5" href="#"><i class="fa fa-arrow-circle-left fa-2x"></i></a>
+                                        <a id="next6" href="#"><i class="fa fa-arrow-circle-right fa-2x"></i></a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div id="declaration" class="tab-pane fade">
+                                <h4>Declaration and attachments</h4><br/>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12">
+                                        Attachments:
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12">
+                                        <Apex:inputfile StyleClass="form-control" value="{!file}" filename="{!fileName}"></Apex:inputfile>
+                                    </div>
+                                    <br/>
+                                    <div class="col-xs-12 col-sm-12">
+                                        <apex:inputCheckbox id="chkBx"/>&nbsp;Tick here to confirm declaration and to submit your application
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row buttons">
+                                    <div class="col-xs-6 col-sm-1">
+                                        <a id="back6" href="#"><i class="fa fa-arrow-circle-left fa-2x"></i></a>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-8">
+                                        
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3">
+                                        <apex:commandButton styleClass="btn btn-primary" id="submit" value="Submit" onclick="return validate(this.id);" action="{!submit}"/>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        </apex:form>
+                        <!-- tab-content div ends here -->
+                    </div>
+                    <!-- coloumn holding tab pane ends here -->
+                    <div class="col-sm-1 hidden-xs"></div>
+                         
+                </div>
+                <!-- inner container ends here -->
+            </div>
+            <!-- parent row div ends here -->
+        </div>
+        <!-- first container div ends here -->
+        <footer class="cotainer-fluid">
+            <div class="spacer"></div>
+            <div id="bigFooter"></div>
+            <div id="footerLogo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Awarding-funds-logo.jpg"/>
+            </div>
+        </footer>
+        
+        <script>
+            var acntId=jQuery("input[id*='acntId']").val();
+            if(acntId)
+                $('.nav-tabs a[href="#project"]').tab('show');
+            
+            $('#next1').click(function(){
+              var orgNm=jQuery("input[id*='orgNm']").val();
+              
+              if(orgNm){
+                  var nextId = $(this).parents('.tab-pane').next().attr("id");
+                  $('[href=#'+nextId+']').tab('show');
+              }
+            
+            })
+            
+            $('#next2').click(function(){
+
+              var adL1=jQuery("input[id*='coadL1']").val();
+              var city=jQuery("input[id*='city1']").val();
+              var state=jQuery("input[id*='state1']").val();
+              var country=jQuery("select[id*='country1']").val();
+              var zip=jQuery("input[id*='zip1']").val();
+              var phone=jQuery("input[id*='phone1']").val();
+             
+              if(adL1 && city && state && country && zip && phone){
+                  var nextId = $(this).parents('.tab-pane').next().attr("id");
+                  $('[href=#'+nextId+']').tab('show');              
+              
+              }
+            
+            })
+            
+            $('#next3').click(function(){
+
+              var title=jQuery("select[id*='title']").val();
+              var fnm=jQuery("input[id*='fnm']").val();
+              var lnm=jQuery("input[id*='lnm']").val();
+              var dob=jQuery("input[id*='dob']").val();
+              
+              var c_adL1=jQuery("input[id*='c_adL1']").val();
+              var c_city=jQuery("input[id*='c_city']").val();
+              var c_state=jQuery("input[id*='c_state']").val();
+              var c_country=jQuery("select[id*='c_country']").val();
+              var c_zip=jQuery("input[id*='c_zip']").val();
+              var c_phone=jQuery("input[id*='c_phone']").val();
+              var c_email=jQuery("input[id*='c_email']").val();
+              
+              if(title && fnm && lnm && dob && c_adL1 && c_city && c_state && c_country && c_zip && c_phone && c_email){
+                  var nextId = $(this).parents('.tab-pane').next().attr("id");
+                  $('[href=#'+nextId+']').tab('show');              
+              
+              }
+            
+            })
+            $('#next4').click(function(){
+              var ptitle=jQuery("input[id*='ptitle']").val();
+              var pname=jQuery("select[id*='pname']").val();
+              
+              if(ptitle && pname){
+                  var nextId = $(this).parents('.tab-pane').next().attr("id");
+                  $('[href=#'+nextId+']').tab('show');
+              }
+            
+            })
+            $('#next5').click(function(){
+              var sdate=jQuery("input[id*='sdate']").val();
+              var edate=jQuery("input[id*='edate']").val();
+              
+              if(sdate && edate){
+                  var nextId = $(this).parents('.tab-pane').next().attr("id");
+                  $('[href=#'+nextId+']').tab('show');
+              }
+              
+            
+            })
+            $('#next6').click(function(){
+
+              var outcome1=jQuery("textarea[id*='outcome1']").val();
+              
+              if(outcome1){
+                  var nextId = $(this).parents('.tab-pane').next().attr("id");
+                  $('[href=#'+nextId+']').tab('show');
+              }
+            
+            })
+            
+             $('#back1').click(function(){
+
+              var adL1=jQuery("input[id*='coadL1']").val();
+              var city=jQuery("input[id*='city1']").val();
+              var state=jQuery("input[id*='state1']").val();
+              var country=jQuery("select[id*='country1']").val();
+              var zip=jQuery("input[id*='zip1']").val();
+              var phone=jQuery("input[id*='phone1']").val();
+             
+              if(adL1 && city && state && country && zip && phone){
+                  var nextId = $(this).parents('.tab-pane').prev().attr("id");
+                  $('[href=#'+nextId+']').tab('show');              
+              
+              }
+            
+            })
+            $('#back2').click(function(){
+
+              var title=jQuery("select[id*='title']").val();
+              var fnm=jQuery("input[id*='fnm']").val();
+              var lnm=jQuery("input[id*='lnm']").val();
+              var dob=jQuery("input[id*='dob']").val();
+              
+              var c_adL1=jQuery("input[id*='c_adL1']").val();
+              var c_city=jQuery("input[id*='c_city']").val();
+              var c_state=jQuery("input[id*='c_state']").val();
+              var c_country=jQuery("select[id*='c_country']").val();
+              var c_zip=jQuery("input[id*='c_zip']").val();
+              var c_phone=jQuery("input[id*='c_phone']").val();
+              var c_email=jQuery("input[id*='c_email']").val();
+              
+              if(title && fnm && lnm && dob && c_adL1 && c_city && c_state && c_country && c_zip && c_phone && c_email){
+                  var nextId = $(this).parents('.tab-pane').prev().attr("id");
+                  $('[href=#'+nextId+']').tab('show');              
+              
+              }
+            
+            })
+            $('#back3').click(function(){
+
+              var ptitle=jQuery("input[id*='ptitle']").val();
+              var pname=jQuery("select[id*='pname']").val();
+              
+              if(ptitle && pname){
+                  var nextId = $(this).parents('.tab-pane').prev().attr("id");
+                  $('[href=#'+nextId+']').tab('show');
+              }
+            
+            })
+            $('#back4').click(function(){
+
+              var sdate=jQuery("input[id*='sdate']").val();
+              var edate=jQuery("input[id*='edate']").val();
+              
+              if(sdate && edate){
+                  var nextId = $(this).parents('.tab-pane').prev().attr("id");
+                  $('[href=#'+nextId+']').tab('show');
+              }
+            
+            })
+            $('#back5').click(function(){
+
+              var outcome1=jQuery("textarea[id*='outcome1']").val();
+              
+              if(outcome1){
+                  var nextId = $(this).parents('.tab-pane').prev().attr("id");
+                  $('[href=#'+nextId+']').tab('show');
+              }
+            
+            })
+            $('#back6').click(function(){
+
+              var nextId = $(this).parents('.tab-pane').prev().attr("id");
+              $('[href=#'+nextId+']').tab('show');
+            
+            })
+        </script>
+        
+     </body>
+</apex:page>

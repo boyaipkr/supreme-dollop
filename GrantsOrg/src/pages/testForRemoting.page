@@ -1,0 +1,24 @@
+<apex:page controller="tstController">
+    <script>
+    		
+    		Visualforce.remoting.timeout = 120000; 
+    		function callRemoting(){
+                alert('Yaima');
+                /*Visualforce.remoting.Manager.invokeAction('!$RemoteAction.tstController.testER',
+                                                         "Yaima",
+                                                          function(result, event) {
+                                                              alert("YO YO!!!");
+                                                              alert(result);
+                                                              });*/
+                tstController.testER('Yari Yari', function(result, event){
+                    alert("YO YO!!!");
+                    });
+                }
+    
+    </script>
+    <apex:form id="id1">
+    <div id="Boyai">
+		<apex:selectCheckboxes id="check1" onclick="callRemoting()" ></apex:selectCheckboxes>
+    </div>
+    </apex:form>
+</apex:page>

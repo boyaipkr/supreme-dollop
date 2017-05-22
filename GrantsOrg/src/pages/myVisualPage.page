@@ -1,0 +1,19 @@
+<apex:page sidebar="false" showHeader="false">
+<style>
+    img{
+        width:80px;
+        hieght:20px;
+        }
+    #hello{
+        color:red;
+        text-size:30px;
+        }
+
+</style>
+<div>
+<img src="https://www.gauri.com/brand/Gauri_Logo_Blue.png"/>
+</div>
+
+<flow:interview name="t_grantee"></flow:interview>
+
+</apex:page>

@@ -1,0 +1,30 @@
+<apex:page controller="copyBigClass" sidebar="false" showheader="false" docType="HTML-5.0">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    
+    
+    <apex:include pageName="copyBigStyle"/>
+    <apex:include pageName="copyBigScript"/>
+    
+    
+    <apex:form id="form">
+        <div id="header">
+            <div><img id="logo" src="http://upload.wikimedia.org/wikipedia/en/d/d2/Big_Lottery_Fund_logo.png"/></div>
+            <div id="logout"><a href="#"><i class="fa fa-sign-out fa-2x"></i></a></div>
+        </div>  
+        <div id="error">
+                <center><apex:outputText id="outTxt" value="{!outTxt}" escape="false"/></center>
+        </div>
+        <div id="body">
+        
+        
+        </div>
+        <div id="footerImage">
+        
+        </div>
+        <div id="footer">
+            <span>&nbsp;</span>
+            <p align="center">Sample Glowing Para</p>
+        </div>
+    </apex:form>
+</apex:page>

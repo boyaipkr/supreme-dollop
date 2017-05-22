@@ -1,0 +1,25 @@
+<apex:page controller="AccountController" showHeader="false" sideBar="false">
+    <apex:form >
+         <style>
+            img{
+                width:100px;
+                hieght:200px;
+             }
+        </style>
+        <div id="logo">
+            <img src="https://www.gauri.com/brand/Gauri_Logo_Blue.png"/>
+        </div>
+        <apex:pageBlock title="My Content" mode="edit">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="My Content Section" columns="2">
+                <apex:inputField value="{!account.name}"/>
+                <apex:inputField value="{!account.Website}"/>
+                <apex:inputField value="{!account.Grantee_Type__c}"/>
+                <apex:inputField value="{!account.Phone}"/>
+
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

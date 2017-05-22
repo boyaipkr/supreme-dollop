@@ -1,0 +1,64 @@
+<apex:page standardController="Order" >
+<!-- Import jQuery from google CDN, could also be static resource--><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<apex:includeScript value="/soap/ajax/23.0/connection.js"/>
+<apex:includeScript value="/soap/ajax/23.0/apex.js"/>
+<script>
+sforce.connection.sessionId = "{!$Api.Session_ID}";
+</script>
+
+
+<script type="text/javascript">// <![CDATA[
+    /*Immediately create a unique alias for this version of jQuery to prevent conflicts with other js libraries*/
+    var j$ = jQuery.noConflict();
+ 
+    /*Determine what type of object is currently being displayed on the page. Only confident way to do this is get object prefix */
+    var objectPefix = window.location.href.substring( window.location.href.indexOf('.com/') + 5, window.location.href.indexOf('.com/') + 8 );
+ 
+    /*Query the records from Dynamic_Button__c object as soon as possible, don't wait for DOM ready event*/
+   var result = sforce.connection.query("Select Button_Name__c, Field_Id__c, Field_Value__c from Dynamic_Button__c where Object_Prefix__c = '" + objectPefix + "'");
+   
+    var records = result.getArray("records");
+  sforce.connection.sessionId = "{!$Api.Session_ID}";
+    /*Execute this code block once page DOM has fully loaded*/
+    j$(document).ready(function(){
+        /*Hide the sidebar last as this is lowest priority. First priority is show/hiding the buttons.
+        Find the sidebarComponentLocator, then find parent div with class 'sidebarModule' and the hide it*/
+        j$("#sidebarComponentLocator").closest(".sidebarModule").hide().prev().hide(); 
+ 
+        /*First loop through the dynamic button records and hide any that are on the layout. We must first hide all the buttons
+        as the Dynamic Button records only contan the 'show' logic*/
+        for (var i = 0; i< records.length; i++) {
+            /*Hide buttons define in Dynamic_Button__c object*/
+            j$("input[name='"+ records[i].Button_Name__c.toLowerCase() +"']").hide();
+        }
+ 
+        /*Now loop through the Dynamic_Button_Records and show button if field value matches that define in record*/
+        for (var i = 0; i< records.length; i++) {
+            /*Get the value from the field on the page layout*/
+            var recordValue = j$("#"+records[i].Field_Id__c+"_ileinner").text();
+            var showValue = records[i].Field_Value__c;
+ 
+            /*Show the button if the value of the field on this record matchs the setting in the Dyamic_Button__c*/
+            if(recordValue == showValue){
+                j$("input[name='"+ records[i].Button_Name__c.toLowerCase() +"']").show();
+            }
+        }
+ 
+        /*Everything above is cool and provides an easy to use interface for the logic but you could always hardcode the logic like so...
+        First get value from the ninja field, this Id would need to be changed
+        var ninjaSkillValue = j$("#00NE0000000d4hc_ileinner").text();
+ 
+        /*Hide Ninja Attack button if Ninja Skill picklist value is not 'High'
+        if(ninjaSkillValue != 'High'){
+            j$("input[name='ninja_attack']").hide();
+        }
+        */
+    });
+ 
+    /*If you are wondering why this file has multiline comments for one one...for some reason single line
+    comments cause the script to break, something funky with salesforce and javascript in the sidebar.*/
+// ]]></script>
+
+
+</apex:page>

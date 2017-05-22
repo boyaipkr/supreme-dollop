@@ -1,0 +1,389 @@
+<apex:page controller="bigClass" sidebar="false" showheader="false" docType="HTML-5.0">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    
+    
+    <apex:include pageName="bigStyle"/>
+    <apex:include pageName="bigScript"/>
+    
+    
+    <apex:form id="form">
+        <div>
+            <div id="header">
+                <div id="big"><img class="logo" src="https://upload.wikimedia.org/wikipedia/en/d/d2/Big_Lottery_Fund_logo.png"/></div>
+          <!--      <div id="big"><img class="logo" src="https://www.gauri.com/wp-content/uploads/2015/07/Gauri-wo-Strap.png"/></div>    -->
+                <div id="logout"><a href="http://my1sttest-developer-edition.ap2.force.com/"><i class="fa fa-sign-out fa-2x">logout</i></a></div>
+            </div>
+            <div id="error">
+                <center><apex:outputText id="outTxt" value="{!outTxt}" escape="false"/></center>
+            </div>
+            <div id="body">
+                <apex:tabPanel styleClass="tabPanel" id="myTabPanel" activeTabClass="actvTab" inactiveTabClass="inactvTab" value="{!tab}">
+                    <apex:tab styleClass="tabs" label="Organization" id="orgTab" name="orgTab" labelWidth="172">
+            
+                        <table class="tbl">
+                            <th colspan="4">Enter your organization&#39;s details</th>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Organization&#39;s Name:</td>
+                                <td class="inpLbl"><apex:inputtext id="orgNm" styleclass="inputReq" required="true" value="{!formData.Organization_Name__c}" html-placeholder="Full Legal Name" title="Organization's Full Legal Name"/></td>
+                                <td class="tdLbl1">Annual Revenue:</td>
+                                <td class="inpLbl"><apex:inputtext styleClass="input" value="{!formData.Annual_Revenue__c}" html-placeholder="in GBP"/></td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Organization Type:</td>
+                                <td class="inpLbl">
+                                    <apex:selectList value="{!formData.Organization_Type__c}"  size="1" multiselect="false" styleClass="selectOption" title="Select your organization type">
+                                        <apex:selectOptions value="{!org}" />   
+                                    </apex:selectList>
+                                </td>
+                                <td class="tdLbl1">Incorporation Year:</td>
+                                <td class="inpLbl"><apex:inputtext styleclass="input" value="{!formData.Foundation_Year__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Charity Number: </td>
+                                <td class="inpLbl"><apex:inputtext styleclass="input" value="{!formData.Charity_Number__c}"/></td>
+                                <td class="tdLbl1">DUNS Number: </td>
+                                <td class="inpLbl"><apex:inputtext styleclass="input" value="{!formData.DUNS_Number__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Public Services: </td>
+                                <td class="inpLbl">
+                                    <apex:selectList value="{!formData.Public_Services__c}" size="1" multiselect="false" styleClass="selectOption">
+                                        <apex:selectOptions value="{!publicServices}"/>
+                                    </apex:selectList>
+                                </td>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <apex:commandButton styleClass="btnStyle" value="Save"  id="orgBtn" onclick="return validate(this.id);" action="{!saveFormDetail}" >
+                        
+                                    </apex:commandButton>
+                        
+                                </td>
+                                <td colspan="2"><div class="leftBtns"><apex:commandButton styleClass="btnStyle" value="Next" action="{!next}"/></div></td>
+                            </tr>
+                        </table>
+                    </apex:tab>
+                    <apex:tab styleClass="tabs" label="Communication" id="comTab" name="comTab" labelWidth="172">
+                         <table class="tbl">
+                            <th colspan="4" class="tdLbl">Enter registered address of your organization</th>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Address Line1:</td>
+                                <td><apex:inputtext styleclass="inputReq" required="true" value="{!formData.Address_Line_1__c}"/></td>
+                                <td class="tdLbl1">Address Line2:</td>
+                                <td><apex:inputtext styleclass="input" value="{!formData.Address_Line_2__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">City/Town:</td>
+                                <td><apex:inputtext styleclass="inputReq" required="true" value="{!formData.City_Town__c}"/></td>
+                                <td class="tdLbl1">State/Province:</td>
+                                <td><apex:inputtext styleclass="input" required="false" value="{!formData.State_Province__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Country:</td>
+                                <td>
+                                    <apex:selectList value="{!formData.Country__c}" size="1" multiselect="false" styleClass="selectOptionReq" required="true">
+                                        <apex:selectOptions value="{!countryNm}"/>
+                                    </apex:selectList>
+                                </td>
+                                <td class="tdLbl1">Zip/Postal Code:</td>
+                                <td><apex:inputtext styleclass="inputReq" required="true" value="{!formData.Zip_Postal_Code__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Phone:</td>
+                                <td><apex:inputtext styleclass="inputReq" required="true" value="{!formData.Phone__c}"/></td>
+                                <td class="tdLbl1">Fax:</td>
+                                <td><apex:inputtext styleclass="input" value="{!formData.Fax__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Website:</td>
+                                <td><apex:inputtext styleclass="input" value="{!formData.Website__c}"/></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><apex:commandButton value="Save" id="comBtn" onclick="return validate(this.id)" action="{!saveFormDetail}"/></td>
+                                <td colspan="2"><div class="leftBtns"><apex:commandButton value="Back" action="{!back}"/><apex:commandButton value="Next" action="{!next}"/></div></td>
+                            </tr>
+                        </table>
+                    </apex:tab>
+                    <apex:tab styleClass="tabs" label="Contact" id="contactTab" name="contactTab" labelWidth="172">
+                        <table class="tbl">
+                            <th colspan="4">Your contact person&#39;s details</th>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Title:</td>
+                                <td>
+                                    <apex:selectList value="{!formData.Title__c}" size="1" multiselect="false" styleClass="selectOptionReq" required="true">
+                                        <apex:selectOptions value="{!myTitle}"/>
+                                    </apex:selectList>
+                                </td>
+                                <td class="tdLbl">First Name:</td>
+                                <td><apex:inputtext styleclass="inputReq" required="true" value="{!formData.First_Name__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl1">Last Name:</td>
+                                <td><apex:inputtext styleclass="inputReq" required="true" value="{!formData.Last_Name__c}"/></td>
+                                <td class="tdLbl1">DOB:</td>
+                                <td><apex:input type="date" styleclass="inputReq" required="true" value="{!dob}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Address Line1:</td>
+                                <td><apex:inputtext styleclass="inputReq" required="true" value="{!formData.CP_Address_Line_1__c}"/></td>
+                                <td class="tdLbl1">Address Line2:</td>
+                                <td><apex:inputtext styleclass="input" value="{!formData.CP_Address_Line_2__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">City/Town:</td>
+                                <td><apex:inputtext styleclass="inputReq" required="true" value="{!formData.CP_City_Town__c}"/></td>
+                                <td class="tdLbl1">State/Province:</td>
+                                <td><apex:inputtext styleclass="input"  required="false" value="{!formData.CP_State_Province__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Country:</td>
+                                <td>
+                                     <apex:selectList value="{!formData.CP_Country__c}" size="1" multiselect="false" styleClass="selectOptionReq" required="true">
+                                        <apex:selectOptions value="{!countryNm}"/>
+                                     </apex:selectList>
+                                </td>
+                                <td class="tdLbl1">Zip/Postal Code:</td>
+                                <td><apex:inputtext styleclass="inputReq" required="true" value="{!formData.CP_Zip_Postal_Code__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Phone:</td>
+                                <td><apex:inputtext styleclass="inputReq" required="true" value="{!formData.CP_Phone__c}"/></td>
+                                <td class="tdLbl1">Fax:</td>
+                                <td><apex:inputtext styleclass="input" value="{!formData.CP_Fax__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Mobile:</td>
+                                <td><apex:inputtext styleclass="input" value="{!formData.CP_Mobile__c}"/></td>
+                                <td class="tdLbl1">Email:</td>
+                                <td><apex:inputtext styleclass="inputReq" required="true" value="{!formData.CP_Email__c}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Preferred Langauge:</td>
+                                <td>
+                                    <apex:selectList value="{!formData.Preferred_Language__c}" size="1" multiselect="false" styleClass="selectOption">
+                                        <apex:selectoptions value="{!prefLang}"/>
+                                    </apex:selectList>
+                                </td>
+                                <td colspan="2">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><apex:commandButton value="Save" id="contactBtn" onclick="return validate(this.id);" action="{!saveFormDetail}"/></td>
+                                <td colspan="2"><div class="leftBtns"><apex:commandButton value="Back" action="{!back}"/> <apex:commandButton value="Next" action="{!next}"/></div></td>
+                            </tr>
+                        </table>
+                    </apex:tab>
+                    <apex:tab styleClass="tabs" label="Project" id="projectTab" name="projectTab" labelWidth="172">
+                        <table class="tbl">
+                            <th colspan="4">About your project</th>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Project Title:</td>
+                                <td><apex:inputtext styleclass="inputReq" required="true" value="{!formData.Project_Title__c}" title="Give your project a short title"/></td>
+                                <td class="tdLbl1">Fund Programme:</td>
+                                <td>
+                                     <apex:selectList value="{!formData.Fund_Program__c}" size="1" multiselect="false" styleClass="selectOptionReq" required="true" title="Project you are applying for">
+                                        <apex:selectOptions value="{!projects}"/>
+                                    </apex:selectList></td>
+                            </tr>
+                             <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr class="tdLbl">
+                                <td colspan="4">Please provide more details about the project(6000 characters)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><apex:inputtextarea rows="5" cols="550" styleclass="inputArea" value="{!formData.Project_Details__c}" title="Summarize what you plan to do, using straightforward language"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><apex:commandButton value="Save" id="projectBtn" onclick="return validate(this.id);" action="{!saveFormDetail}"/></td>
+                                <td colspan="2"><div class="leftBtns"><apex:commandButton value="Back" action="{!back}"/><apex:commandButton value="Next" action="{!next}"/></div></td>
+                            </tr>
+                        </table>
+                    </apex:tab>
+                    <apex:tab styleClass="tabs" label="Funding" id="fundTab" name="fundTab" labelWidth="172">
+                         <table class="tbl">
+                            <th colspan="4">Funding Data</th>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="tdLbl">Project Start Date:</td>
+                                <td><apex:input type="date" styleclass="inputReq" id="sdate" required="true" value="{!startDate}" title="when do you plan to start your project"/></td>
+                                <td class="tdLbl">Project End Date:</td>
+                                <td><apex:input type="date" styleclass="inputReq" id="edate" required="true" value="{!endDate}" title="when do you plan to end your project"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">&nbsp;</td>
+                                <td><apex:commandButton id="dateBtn" value="Input Budget Data" action="{!getDates}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th id="capital" class="{!stlyeCapRevClass}">Capital</th>
+                                <th>&nbsp;</th>
+                                <th id="revenue" class="{!stlyeCapRevClass}">Revenue</th>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <apex:repeat value="{!iterator}" var="c">
+                                    <table class="dynamicTbl">
+                                        <tr>
+                                            <td>Year {!c+1} (in £)</td>
+                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <apex:inputtext styleClass="input" value="{!capitals[c]}" html-placeholder="in £"/></td>
+                                        </tr>
+                                    </table>
+                                    </apex:repeat>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <apex:repeat value="{!iterator}" var="r">
+                                    <table class="dynamicTbl">
+                                        <tr>
+                                            <td><apex:inputtext styleClass="input" value="{!revenues[r]}" html-placeholder="in £"/></td>
+                                        </tr>
+                                    </table>
+                                    </apex:repeat>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><apex:commandButton value="Save" id="fundBtn" onclick="return validate(this.id);" action="{!saveFormDetail}"/></td>
+                                <td colspan="2"><div class="leftBtns"><apex:commandButton value="Back" action="{!back}"/><apex:commandButton value="Next" action="{!next}"/></div></td>
+                            </tr>
+                        </table>
+                    </apex:tab>
+                    <apex:tab styleClass="tabs" label="Outcomes" id="outcomesTab" name="outcomesTab" labelWidth="172">
+                        <table class="tbl">
+                            <th colspan="4">How will people benefit from your project</th>
+                            <tr>
+                                <td colspan="4" class="tdLbl">Outcome1</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><apex:inputtextarea styleclass="outcomeReq" required="true" value="{!outcomes[0]}" cols="100" rows="3"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="tdLbl">Outcome2</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><apex:inputtextarea styleclass="outcome" value="{!outcomes[1]}" cols="100" rows="3"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="tdLbl">Outcome3</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><apex:inputtextarea styleclass="outcome" value="{!outcomes[2]}" cols="100" rows="3"/></td>
+                            </tr>
+                            
+                            <!-- this portion commented out on 20Jan 2016
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="tdLbl">Outcome1</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><apex:inputtext styleclass="outcomeReq" required="true" value="{!outcomes[0]}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="tdLbl">Outcome2</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><apex:inputtext styleclass="outcome" value="{!outcomes[1]}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="tdLbl">Outcome3</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><apex:inputtext styleclass="outcome" value="{!outcomes[2]}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="tdLbl">Outcome4</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><apex:inputtext styleclass="outcome" value="{!outcomes[3]}"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="tdLbl">Outcome5</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><apex:inputtext styleclass="outcome" value="{!outcomes[4]}"/></td>
+                            </tr>
+                            -->
+                            
+                            <tr>
+                                <td colspan="2"><apex:commandButton value="Save" id="outcomesBtn" onclick="return validate(this.id);" action="{!saveFormDetail}"/></td>
+                                <td colspan="2"><div class="leftBtns"><apex:commandButton value="Back" action="{!back}"/><apex:commandButton value="Next" action="{!next}"/></div></td>
+                            </tr>
+                            
+                            
+                            
+                        </table>
+                    </apex:tab>
+                    <apex:tab styleClass="tabs" label="Declaration" id="decTab" name="decTab" labelWidth="172">
+                        <table class="tbl">
+                            <th colspan="4">Attachments</th>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                
+                                <td colpsan ="4"><Apex:inputfile value="{!file}" filename="{!fileName}"></Apex:inputfile></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            <tr>
+                               <td colspan="4" class="tdLbl"><apex:inputCheckbox id="chkBx"/>&nbsp;Tick here to confirm declaration and to submit your application</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2"><div class="leftBtns"><apex:commandButton value="Back" action="{!back}"/><apex:commandButton id="submit" value="Submit" onclick="return validate(this.id);" action="{!submit}"/></div></td>
+                            </tr>
+                
+                        </table>
+            
+                    </apex:tab>
+                </apex:tabPanel>
+            
+            </div>
+            <div id="footerImage">
+            
+            </div>
+            <div id="footer">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Awarding-funds-logo.jpg"/>      
+            </div>
+        </div>    
+    </apex:form> 
+</apex:page>

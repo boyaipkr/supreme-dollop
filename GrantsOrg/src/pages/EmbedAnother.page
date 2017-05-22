@@ -1,0 +1,5 @@
+<apex:page showheader="false" sidebar="false">
+    <p>Before insert.</p>
+    <apex:include pagename="MainPage"/>
+    <p>After insert.</p>
+</apex:page>

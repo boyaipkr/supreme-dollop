@@ -1,0 +1,193 @@
+<apex:page controller="BigClassCopy" sidebar="false" showheader="false" action="{!prgrmDetails}" doctype="html-5.0" standardStylesheets="false">
+     <head>
+         <meta charset="utf-8"/>
+         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+         
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+         <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'/>
+         
+         <style>
+             body{font-family:Lato,Arial,Sans;}
+             .spacer{height:100px;}
+             .minSpacer{height:25px;}
+             .row{margin-top:5px;}
+             .buttons{text-align:right;}
+             
+             .navbar li a,.navbar-brand{
+                 line-height:70px;
+                 height:70px;
+                 padding-top:0px;
+                 font-size:16px;
+             }
+             .navbar-brand img{height:70px;}
+             
+             .nav-tabs li a{
+                background-color:#e6e6e6 !important;
+                color:#000;
+             }
+             .row-eq-height {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+             }
+             .nav-tabs li a:hover, .nav-tabs li.active a{color:#fff !important;background-color:#ffb3ee !important;}
+             
+             #bigFooter{
+                 background-image:url('https://lh4.googleusercontent.com/-sGks2m-eVtc/VUsrUf3tDiI/AAAAAAAAAZs/QQKZ2BAG5Hw/w1039-h92-no/footer%2Blogo.png');
+                 min-height:92px;
+                 background-repeat:repeat-x;
+                 background-color:#56aa4f;
+            }
+            #footerLogo{
+                min-height:42px;
+                width:100%;
+                background-color:Gainsboro;
+            }
+            #footerLogo img{
+                
+            }
+            #programTable{
+                font-size:16px;
+                width:70%;
+                margin-left:15%;
+            }
+            #programTable{
+                border:2px solid Gainsboro;
+            }
+            #programTable .row:nth-child(odd){
+                background-color:white;
+            }
+            #programTable .row:nth-child(even){
+                background-color:gainsboro;
+            }
+            #programTable #th{
+                background-color:#66ffe6;
+                font-size:20px;
+            }
+            #loginModal [class*='col-'],#registerModal [class*='col-']{
+                margin-bottom:5px;
+            }
+         </style>
+     </head>
+     <body data-spy="scroll" data-target=".navBar" data-offset="80">
+         <nav class="navbar navbar-default navbar-fixed-top">
+             <div class="container-fluid">
+                 <div class="navbar-header">
+                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                     </button>
+                     <a href="#" class="navbar-brand"><img src="https://upload.wikimedia.org/wikipedia/en/d/d2/Big_Lottery_Fund_logo.png"/></a>
+                 </div>
+                 <div>
+                     <div id="navBar" class="navbar-collapse collapse">
+                         <ul class="nav navbar-nav navbar-right">
+                             <li><a href="#" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in"></i>Log In</a></li>
+                             <li><a href="#" data-toggle="modal" data-target="#registerModal">Register</a></li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+         </nav>
+         <apex:form id="form">
+         <div class="container-fluid spacer"></div>
+         
+         <!-- Login Modal --> 
+         
+         <div id="loginModal" class="modal modal-admin fade" role="dialog">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h3>Log In</h3>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-sm-2">
+                                  <i class="fa fa-envelope"></i>
+                              </div>
+                              <div class="col-sm-10">
+                                  <apex:inputtext styleClass="form-control" value="{!usr}" html-placeholder="Email"/>
+                              </div>
+                              <div class="col-sm-2">
+                                  <i class="fa fa-key"></i>
+                              </div>
+                              <div class="col-sm-10">
+                                  <apex:inputsecret styleClass="form-control" value="{!pass}" html-placeholder="Password"/>
+                              </div>
+                              <div class="col-sm-12 pull-right">
+                                  <apex:commandButton styleClass="btn btn-success pull-right" value="Log In"  action="{!login}"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+         </div>
+         
+         <!--  register Modal -->
+         
+         <div id="registerModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h3>Register Your Interest</h3>
+                      </div>
+                      <div class="modal-body">
+                          
+                          <div class="row">
+                              
+                              <div class="col-sm-12">
+                                  <apex:inputtext id="orgNm" styleClass="form-control" html-placeholder="Organization's Name" value="{!orgNm}"/>
+                              </div>
+                              <div class="col-sm-12">
+                                  <apex:inputtext id="emailId" styleClass="form-control" html-placeholder="Email" value="{!emailId}"/>
+                              </div>
+                              <div class="col-sm-12">
+                                  <apex:inputtext id="mobNo" styleClass="form-control" html-placeholder="Mobile No" value="{!mobNo}"/>
+                              </div>
+                              <div class="col-sm-12 pull-right">
+                                  <apex:commandButton styleClass="btn btn-success pull-right" value="Register"  action="{!register}"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+         </div>
+         
+         <div id="error" class="container"><p><center><apex:outputText styleClass="output" value="{!output}" /></center></p></div>
+         
+         <div class="container" id="programTable">
+             <div class="row">
+                 <div class="col-xs-12 col-sm-12 text-center"><h3>Available Programmes</h3></div>
+             </div>
+             <div class="row">
+                 <div id="th" class="col-xs-6 col-sm-6 ">Programme Name</div>
+                 <div id="th" class="col-xs-6 col-sm-6">Programme Description</div>
+             </div>
+             <apex:repeat value="{!prgrm}" var="pr">
+                 <div class="row">
+                     <div class="col-xs-6 col-sm-6"><span>{!pr.name}</span></div>
+                     <div class="col-xs-6 col-sm-6"><span>{!pr.Program_Description__c}</span></div>
+                 </div>
+             </apex:repeat>
+         </div>
+         
+         </apex:form>   
+        <div class="container-fluid spacer"></div>
+        <footer class="cotainer-fluid">
+            <div class="spacer"></div>
+            <div id="bigFooter"></div>
+            <div id="footerLogo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Awarding-funds-logo.jpg"/>
+            </div>
+        </footer>    
+     </body>
+</apex:page>

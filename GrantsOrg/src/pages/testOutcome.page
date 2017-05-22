@@ -1,0 +1,21 @@
+<apex:page controller="OutcomeClass" sidebar="false" showheader="false" doctype="html-5.0" standardStylesheets="false">
+  <meta charset="utf-8"/>
+  <meta name="viewoprt" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'/>
+  <style>
+      body{font-family:Questrial,Arial,sans;}
+  </style>
+  <apex:pageBlock >
+      <apex:form >
+          Application id: {!appId}<br/><br/>
+          Application Name: {!name}<br/><br/>
+          
+          Outcomes: <apex:inputTextarea value="{!outcomes}" rows="5" cols="200"/>
+          <apex:commandButton value="Update" action="{!updateOutcomes}"/>
+          <button type="button" class="btn btn-success" name="btn1" value="{!name}">Click</button>
+      </apex:form>
+  </apex:pageBlock>
+</apex:page>

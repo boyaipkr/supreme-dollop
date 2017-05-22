@@ -1,0 +1,8 @@
+<apex:page standardController="Grants_Programs__c" extensions="Recordclass">
+<!-- <apex:sectionHeader title="Record Types" subtitle="as Picklist"/> -->
+<apex:form >
+<apex:selectList id="recordtypes" value="{!selectedrecordtype}" size="1" title="Recordtypes">
+        <apex:selectOptions value="{!RecordTypes}"></apex:selectOptions>
+        </apex:selectList>
+</apex:form>
+</apex:page>

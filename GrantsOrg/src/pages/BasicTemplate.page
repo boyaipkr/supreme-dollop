@@ -1,0 +1,7 @@
+<apex:page standardController="account" sidebar="false" showheader="false">
+    <h1>My Fancy Site</h1>
+    <body>
+        <p>Kuch Bhi to likha hai....</p>
+    </body>
+    <apex:insert name="body"/>        
+</apex:page>

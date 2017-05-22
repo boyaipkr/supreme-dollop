@@ -1,0 +1,85 @@
+<apex:page controller="bigClass" sidebar="false" showHeader="false">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'/>
+    <style>
+        *{
+            font-family:'ubuntu',sans-serif;
+        }
+        span{
+            font-style:bold;
+            font-size:18px;
+        }
+        #header #body #footerImage #footer{
+            width:100%;
+            clear:both;
+        }
+        #header{
+            background-color:Gainsboro;    
+            background-image:none;
+        }
+        #header img{
+            height:120px;
+            width:120px;
+           // width:135px;
+           // height:53px;
+            margin-left:10px;
+        }
+        
+        #body{
+            min-height:300px;
+        }
+        .tbl{
+            border:2px solid black;
+            border-radius:12px;
+            box-shadow: 2px 2px 3px 2px #333333;
+            font-family: "Ubuntu", sans-serif;
+            font-size:15px;
+            text-align:center;
+            margin-top:50px;
+            width:50%;
+            
+        }
+        a{
+            color:blue;
+            text-decoration:none;
+        }
+        #footerImage{
+            background-image:url("https://lh4.googleusercontent.com/-sGks2m-eVtc/VUsrUf3tDiI/AAAAAAAAAZs/QQKZ2BAG5Hw/w1039-h92-no/footer%2Blogo.png"); 
+            background-color:Gainsboro;
+            background-repeat:repeat-x;
+            min-height:100px;            
+        }
+        #footer{
+            background-color:Gainsboro;
+            min-height:150px;
+        }
+        #footer img{
+            margin-top:15px;
+        }
+    </style>
+    <div id="header">
+        <div id="big"><img class="logo" src="https://upload.wikimedia.org/wikipedia/en/d/d2/Big_Lottery_Fund_logo.png"/></div>
+          <!--      <div id="big"><img class="logo" src="https://www.gauri.com/wp-content/uploads/2015/07/Gauri-wo-Strap.png"/></div>    -->
+    </div>
+    <div id="body">
+    <apex:form >
+        <center><table class="tbl">
+            <tr>
+                <td><p>Your application has been submitted successfully with the Reference id:<span> {!appNo} </span></p></td>
+            </tr>
+            <tr>
+                <td><p>An Email has been sent to your account with further details.</p></td>
+            </tr>
+            <tr>
+                <td><p>Click&nbsp;<a href="https://my1sttest-developer-edition.ap2.force.com/bigPg">Here</a>&nbsp;to Login Again.</p></td>
+            </tr>
+        </table>
+        </center>
+    </apex:form>
+    </div>
+    <div id="footerImage">
+        
+    </div>
+    <div id="footer">
+       <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Awarding-funds-logo.jpg"/>
+    </div>
+</apex:page>

@@ -1,0 +1,77 @@
+<apex:page controller="myClass1" showHeader="false" doctype="HTML-5.0">
+    <script>
+        function addRows(){
+            var tbl=document.getElementById("dataTable");
+            var rowCount=tbl.rows.length;
+            alert(rowCount);
+            
+            var row=tbl.insertRow(rowCount);
+            var cell1=row.insertCell(0);
+            cell1.innerHTML=" ";
+            
+            var cell2=row.insertCell(1);
+            var element2=document.createElement("input");
+            element2.type="text";
+            element2.value="{!capitals[0]}";
+            cell2.appendChild(element2);
+            
+            var cell3=row.insertCell(2);
+            cell3.innerHTML=" ";
+            
+            var cell4=row.insertCell(3);
+            var element4=document.createElement("input");
+            element4.type="text";
+            element4.value="{!revenues}";
+            cell4.appendChild(element4);    
+        }
+        function getId(id){
+            alert(id);
+        }
+                
+    </script>
+    <apex:form id="form">
+        <apex:tabPanel >
+            <apex:tab label="one">
+                <p>Tab one Content</p>
+                <apex:outputtext id="out1" value="{!out1}" escape="false"/>
+                <apex:commandButton value="addRow" onclick="addRows();" rerender="dataTable,out1"/>
+                <apex:commandButton value="goDynamic" action="{!goDynamic}" rerender="dataTable,out1,rpt"/>
+                <table id="dataTable" style="border:2px solid green">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><apex:input type="date" id="dt1" value="{!d1}"/></td>
+                        <td>&nbsp;</td>
+                        <td><apex:input type="date" id="dt2" value="{!d2}"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Capital</th>
+                        <th>&nbsp;</th>
+                        <th>Revenue</th>
+                    </tr>
+                    <apex:variable value="0" var="num"/>
+                    <apex:repeat value="{!iterator}" var="c" id="rpt">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><apex:inputtext value="{!capitals[c]}"/>
+                            <apex:variable value="{!VALUE(num) + 1}" var="num"/>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td><apex:inputtext /></td>
+
+                    </tr>
+                    </apex:repeat>    
+                </table>
+            </apex:tab>
+            <apex:tab label="two">
+            
+            </apex:tab>
+        </apex:tabPanel>
+    </apex:form>
+    <br/><br/>
+    
+    
+</apex:page>

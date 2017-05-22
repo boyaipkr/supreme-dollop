@@ -1,0 +1,30 @@
+<apex:page controller="getUser" sidebar="false">
+    <style>
+        #login{
+            position:auto;
+            background-color:white;
+            border:solid;
+            font-family:courier;
+            font-size:18px;
+            margin:10% 30% 0% 30%;
+            text-align:center;
+            width:30%;
+            height:25%;
+        }
+        
+    </style>
+  <div id="login"><apex:form >
+      <p>Enter Login Details.</p>
+      <p>Username:<apex:inputText value="{!usr}"/></p>
+      <p>Password:<apex:inputsecret value="{!pass}"/></p>
+      <p><apex:commandButton value="Save" action="{!saveList}"/>
+          <apex:commandButton value="Login" action="{!search}"/>
+          <apex:commandButton value="Delete" action="{!dlt}"/>
+           
+      </p>
+      <!--saveList is a function in getUser class-->
+      <a href="">Forgot Password?</a>
+      <a href="">Sign Up</a>
+  </apex:form>
+  </div>
+</apex:page>

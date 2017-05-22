@@ -1,0 +1,107 @@
+<apex:page controller="BigClassCopy" sidebar="false" showheader="false" doctype="html-5.0" standardStylesheets="false">
+     <head>
+         <meta charset="utf-8"/>
+         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+         
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+         <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'/>
+         
+         <style>
+             body{font-family:Lato,Arial,Sans;}
+             .spacer{height:100px;}
+             
+             .minSpacer{height:25px;}
+             .row{margin-top:5px;}
+             .buttons{text-align:right;}
+             
+             .navbar li a,.navbar-brand{
+                 line-height:70px;
+                 height:70px;
+                 padding-top:0px;
+                 font-size:16px;
+             }
+             .navbar-brand img{height:70px;}
+             
+             .nav-tabs li a{
+                background-color:#e6e6e6 !important;
+                color:#000;
+             }
+             .row-eq-height {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+             }
+             .nav-tabs li a:hover, .nav-tabs li.active a{color:#fff !important;background-color:#ffb3ee !important;}
+             
+             footer{
+                 position:fixed;
+                 bottom:0px;
+                 width:100%;
+             }
+             #bigFooter{
+                 background-image:url('https://lh4.googleusercontent.com/-sGks2m-eVtc/VUsrUf3tDiI/AAAAAAAAAZs/QQKZ2BAG5Hw/w1039-h92-no/footer%2Blogo.png');
+                 min-height:92px;
+                 background-repeat:repeat-x;
+                 background-color:#56aa4f;
+            }
+            #footerLogo{
+                min-height:42px;
+                width:100%;
+                background-color:Gainsboro;
+            }
+            #footerLogo img{
+                
+            }
+            
+         </style>
+     </head>
+     <body data-spy="scroll" data-target=".navBar" data-offset="80">
+         <nav class="navbar navbar-default navbar-fixed-top">
+             <div class="container-fluid">
+                 <div class="navbar-header">
+                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                     </button>
+                     <a href="#" class="navbar-brand"><img src="https://upload.wikimedia.org/wikipedia/en/d/d2/Big_Lottery_Fund_logo.png"/></a>
+                 </div>
+                 <div>
+                     <div id="navBar" class="navbar-collapse collapse">
+                         <ul class="nav navbar-nav navbar-right">
+                             
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+         </nav>
+         
+         <div class="container-fluid spacer"></div>
+         
+         <div class="container">
+             <div class="row text-center">
+                 <div class="col-sm-3">&nbsp;</div>
+                 <div class="col-sm-6">
+                     <h4>Your application has been submitted successfully with <br/>Reference id:<span> {!appNo} </span></h4>
+                     <h4>An Email has been sent to your account with further details.</h4>
+                     <h4>Click <a href="https://my1sttest-developer-edition.ap2.force.com/bigPg">Here</a> to Login Again.</h4>
+                 </div>
+                 <div class="col-sm-3">&nbsp;</div>
+                 
+             </div>
+         </div>
+         <div class="container maxSpacer"></div>
+         
+        <footer class="cotainer-fluid">
+            <div class="spacer"></div>
+            <div id="bigFooter"></div>
+            <div id="footerLogo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Awarding-funds-logo.jpg"/>
+            </div>
+        </footer>    
+     </body>
+</apex:page>

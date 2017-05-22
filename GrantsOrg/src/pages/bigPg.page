@@ -1,0 +1,212 @@
+<apex:page controller="bigClass" sidebar="false" showheader="false" action="{!prgrmDetails}" doctype="HTML-5.0" standardStylesheets="false">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    
+    <style>
+        *{
+            font-family:'Ubuntu',courier;
+            font-size:16px;
+            margin:0px;
+            padding:0px;
+        }
+        .req{
+            color:red;
+            font-weight:bold;
+        }
+        .btns{
+            width:150px;
+        }
+        .output{
+            color:red;
+            font-weight:solid;
+        }
+        input[type="submit"]{
+            cursor:pointer;
+        }
+        input[type="submit"]:hover{
+            font-weight:bold;
+        }
+        /*
+        input[type="text"],input[type="email"],input[type="password"]{
+            border:1px solid #ff66d7;
+        }
+        */
+        #header,#error, #body, #register, #footerImage, #footer{
+            clear:both;
+            display:block;
+            float:left;
+            width:100%;
+        }
+        #header{
+            background-color:Gainsboro;
+            margin-top:-60px;
+        }
+        #body{
+            margin-top:20px;
+        }
+        #footerImage, #register{
+            margin-top:50px;
+        }
+        #footerImage, #footer{
+            background-color:Gainsboro;
+            min-height:60px;
+        }
+        #header img{
+            background-image:none;
+            height:120px;
+            width:120px;
+            margin-top:60px;
+            margin-left:10px;
+        }
+        #error{
+            min-height:5px;
+        }
+        #body div:first-child{ /*div holding bodyTable (available programs) */
+            border:2px solid black;
+            float:left;
+            margin-left:13%;
+            width:50%;
+        }
+        #body div:last-child{ /*div holding loginTable (sign in) */
+            box-shadow:0px 3px 0px lightGrey;
+            display:block;
+            float:right;
+            margin-right:13%;
+            width:20%;
+        }
+        #bodyTable{
+            box-shadow:3px 3px 3px 3px grey;
+            width:100%;
+        }
+        #bodyTable th{
+            background-color:Grey;
+            border:1px outset grey;
+            box-shadow:1px 1px 0px 0px grey;
+            color:white;
+            padding:8px;
+        }
+        #bodyTable tr:nth-child(odd){
+            background-color:ghostwhite;
+        }
+        #bodyTable tr:nth-child(even){
+            background-color:gainsboro;
+        }
+        tr, th, td{
+           border-collapse: collapse;
+           padding:5px;
+        }
+        #bodyTable tr:hover{
+            background-color:lightBlue;
+        }
+        #loginTable{
+            border-left:1px solid lightpink;
+            border-top:1px solid lightpink;
+            box-shadow:3px 5px 1px 0px grey;
+            width:100%;
+        }
+        #loginTable th{
+            background-color:deeppink;
+            border:1px outset deepPink;
+            box-shadow:1px 1px 0px 0px pink;
+            color:white;
+            padding:8px;
+        }
+        .login{
+            /*for input fields email and password */
+            border:none;
+            padding:8px;
+            width:82%;
+        }
+        #register{
+           background-color:Moccasin;
+           box-shadow:3px 3px 3px 3px grey;
+           margin-left:13%;
+           width:75%;
+        }
+        #register div:first-child{
+            background-color:DarkOrange;
+            border:1px outset DarkOrange;
+            color:white;
+            text-align:center;
+        }
+        #register div:nth-child(2), #register div:last-child{
+            padding:10px;
+        }
+        #register div:last-child{
+            float:right;
+            margin-right:0.5%;
+        }
+        #footerImage{
+            background-image:url("https://lh4.googleusercontent.com/-sGks2m-eVtc/VUsrUf3tDiI/AAAAAAAAAZs/QQKZ2BAG5Hw/w1039-h92-no/footer%2Blogo.png");
+            background-repeat:repeat-x;
+            min-height:100px;
+        }
+        #footer img{
+            margin-top:13px;
+        }
+        
+    </style>
+    <script>
+        
+    </script>
+    
+    <apex:form id="form">
+        <div id="header">
+            <img id="headerImage" src="https://upload.wikimedia.org/wikipedia/en/d/d2/Big_Lottery_Fund_logo.png"/>
+        </div>
+        <div id="error"><p><center><apex:outputText styleClass="output" value="{!output}" /></center></p></div>
+        <div id="body">
+            <div>
+                <table id="bodyTable">
+                    <tr>
+                        <th colspan="2">Available Programmes</th>
+                    </tr>
+                    <apex:repeat value="{!prgrm}" var="pr">
+                    <tr>
+                        <td id="td"><span>{!pr.name}</span></td>
+                        <td><span>{!pr.Program_Description__c}</span></td>
+                    </tr>
+                    </apex:repeat>
+                </table>
+            </div>
+            <div>
+                <table id="loginTable">
+                    <tr>
+                        <th colspan="2">Sign In</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <i class="fa fa-envelope"></i>&nbsp;&nbsp;<apex:input type="email" styleClass="login" html-placeholder="Email" value="{!usr}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <i class="fa fa-key"></i>&nbsp;&nbsp;<apex:inputsecret styleClass="login" html-placeholder="Password" value="{!pass}"/> 
+                        </td>
+                    </tr>
+                    <tr align="right">
+                        <td colspan="2">
+                            <apex:commandButton styleClass="btns" value="Login" action="{!login}" onclick="return validateLogin(this.id);"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="register">
+            <div><h2><span>Register Your Interest</span></h2></div>
+            <div>
+                Organization Name:&nbsp;<span class="req">|</span><apex:inputtext id="oNm" value="{!orgNm}"/>&nbsp;&nbsp;
+                Email Id:&nbsp;<span class="req">|</span><apex:input type="email" id="eId" value="{!emailId}"/>&nbsp;&nbsp;
+                Mobile No:&nbsp;<span class="req">|</span><apex:inputtext id="mNo" value="{!mobNo}"/>
+            </div>
+            <div><apex:commandButton styleClass="btns" value="Register" action="{!register}"/></div>
+        </div>
+        <div id="footerImage">
+            
+        </div>
+        <div id="footer">
+           <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Awarding-funds-logo.jpg"/>
+        </div>
+</apex:form>
+    
+</apex:page>

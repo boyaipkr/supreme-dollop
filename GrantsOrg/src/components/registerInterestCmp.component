@@ -1,0 +1,25 @@
+<apex:component controller="registerInterestController">
+    <table>
+        <tr>
+            <td><apex:outputLabel value="Register Your Interest"/></td>
+            <td/>
+            <td/>
+            <td/>
+            <td/>
+        </tr>
+        <tr>
+            <td><apex:outputLabel value="Email Id:"/></td>
+            <td><apex:inputText value="{!mailId}"/></td>
+            <td><apex:outputLabel value="Full Name:"/></td>
+            <td><apex:inputText value="{!fullName}"/></td>
+            <td><apex:commandButton value="Register" action="{!saveandmail}" /></td>
+        </tr>
+        <tr>
+            <td id='msgTD'><apex:outputLabel value="{!outputString}"/></td>
+            <td/>
+            <td/>
+            <td/>
+            <td/>            
+        </tr>
+    </table>
+</apex:component>

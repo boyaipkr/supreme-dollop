@@ -1,0 +1,44 @@
+<apex:page id="pg" controller="TestHtml5" sidebar="false" showheader="false" doctype="html-5.0" standardStylesheets="false">
+  <head>
+      <meta charset="utf-8"/>
+         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+         
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+         <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'/>
+         
+         <style>
+             body{font-family:Lato,Arial,Sans;}
+             #div1{margin-top:50px;}
+         </style>
+  </head>
+  <body>
+      <apex:form id="form">
+          <div id="div1" class="container">
+              <div class="row">
+                  <div class="col-sm-3">
+                      <apex:inputtext id="nm" value="{!nm}" styleClass="form-control" html-placeholder="name"/><br/>
+                      <apex:inputtextarea id="comments" value="{!comments}" styleClass="form-control" html-placeholder="comments"/><br/>
+                      <apex:selectList id="title" value="{!title}" multiselect="false" size="1" styleClass="form-control">
+                          <apex:selectOptions value="{!myTitle}"/>
+                      </apex:selectList><br/>
+                      <a href="#" class="btn btn-default" id="link">Click Me</a>
+                  </div>
+              </div>    
+          </div>
+      </apex:form>
+      <script>
+          $('#link').click(function(){
+
+              var nm=jQuery("input[id*='nm']").val();
+              var comments=jQuery("textarea[id*='comments']").val();
+              var title=jQuery("select[id*='title']").val();
+              alert(nm+"\n"+comments+"\n"+title);
+              
+              
+            })
+      </script>
+  </body>
+</apex:page>

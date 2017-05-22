@@ -1,0 +1,95 @@
+<apex:page standardController="Grants_Programs__c" recordSetVar="gPrg" sidebar="false" showHeader="false" standardStylesheets="false" extensions="registerInterestController">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'/>   
+    <!--    <apex:pageBlock>
+        <apex:pageBlockSection>
+        	<apex:pageBlockTable id="TB1" value="{!gPrg}" var="a">
+                <apex:column value="{!a.Name}"/>
+            	<apex:column value="{!a.Program_Description__c}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock> 
+    <apex:dataTable value="{!gPrg}" var="a">
+        <apex:column headerValue="Name" value="{!a.name}"/>
+        <apex:column headerValue="Description" value="{!a.Program_Description__c}"/>
+    </apex:dataTable> -->
+    
+    <script src = "https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+    <script>
+    	$(document).ready(function(){
+            var nameText;
+            $('input[id$="inpSmartSearch"]').keyup(function(){
+                $('tr[class$="trCls"]:hidden').each(function(){
+                    $(this).show();
+                    });
+                
+                var curVal =  $('input[id$="inpSmartSearch"]').val();
+                $('tr[class$="trCls"] td[class$="tdCls"]').each(function(){
+                	nameText = $(this).text();
+                    if(nameText.indexOf(curVal) < 0 )
+                    {
+                        $(this).parent().hide();
+                     }
+                   });
+                });
+            });
+    
+    		
+         	function setPrgName() {
+                var selId, isChecked;
+            	$('tr[class$="trCls"] td[class$="selButton"]').each(function(){
+                   	isChecked = $(this).children().children().children().children().children().children('input[type=checkbox]').prop("checked");	
+                    if(isChecked){
+                        selId = $(this).parent().children('td[class$="tdCls"]').text();
+                        callRemoting(selId);
+                        }
+                    });
+            } 
+    
+    		Visualforce.remoting.timeout = 120000; 
+    		function callRemoting(selId){
+                /*Visualforce.remoting.Manager.invokeAction('!$RemoteAction.remotingController.setPrg',
+                                                         "Yaima",
+                                                          function(result, event) {
+                                                              alert("YO YO!!!");
+                                                              alert(result);
+                                                              });*/
+                registerInterestController.setPrg(selId, function(result,event){         
+                    });
+                }
+    </script>
+    <div id="header">
+        <img id="headerImage" src="{!$Resource.Logo}"/>
+    </div>
+    <br/><br/>
+    <div id="Data">
+        <apex:form >
+            <div id="input">
+                Smart Seach: 
+                <apex:inputText id="inpSmartSearch" label="Smart Search"/>
+            </div>
+            <br/><br/>
+            <Div id="table">
+            <table id = "tb1">
+                <apex:repeat value="{!gPrg}" var="a">                    
+                    <tr class="trCls" >
+                        <td class="tdCls">{!a.name}</td>
+                        <td>{!a.Program_Description__c}</td>
+                        <td class="selButton"><apex:selectCheckboxes value="{!a.name}" onclick="setPrgName()"></apex:selectCheckboxes></td>
+                    </tr>
+                </apex:repeat>
+            </table>
+            </Div>
+            <br/><br/>
+			<div id="login">
+                <c:loginCmp />
+            </div>
+            <br/>
+            <div id="register">
+                <c:registerInterestCmp />
+            </div>
+            <apex:commandButton onclick="setPrgName()" value="Test"/>
+        </apex:form>
+    </div>
+</apex:page>
